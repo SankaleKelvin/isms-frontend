@@ -36,7 +36,7 @@
     ></v-app-bar-nav-icon>
 
     <v-toolbar-title class="text-uppercase">
-      <span class="font-weight-light">DISSERTATION</span>
+      <span class="font-weight-light">DISSERTATION-TEST</span>
     </v-toolbar-title>
 
     <v-spacer></v-spacer>
@@ -59,14 +59,9 @@
         </v-list-item>
       </v-list>
     </v-menu>
-    
+
     <!-- Add logout button if authenticated -->
-    <v-btn 
-      v-if="isAuthenticated" 
-      text 
-      @click="handleLogout"
-      class="ml-2"
-    >
+    <v-btn v-if="isAuthenticated" text @click="handleLogout" class="ml-2">
       <v-icon left>mdi-logout</v-icon>
       <span>Logout</span>
     </v-btn>
