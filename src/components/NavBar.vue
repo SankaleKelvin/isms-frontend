@@ -36,7 +36,7 @@
     ></v-app-bar-nav-icon>
 
     <v-toolbar-title class="text-uppercase">
-      <span class="font-weight-light">DISSERTATION-TEST-FUllAutomation</span>
+      <span class="font-weight-light">DISSERTATION-TEST-FUllAutomation-Job</span>
     </v-toolbar-title>
 
     <v-spacer></v-spacer>
