@@ -44,11 +44,11 @@ export function useAuth() {
     error.value = null
 
     try {
-      if (!credentials.email || !credentials.password) {
-        throw new Error('Email and password are required')
+      if (!credentials.username || !credentials.password) {
+        throw new Error('Username and password are required')
       }
 
-      const response = await api.post('login', credentials)
+      const response = await api.post('api/auth/signin', credentials)
       const { token, user: userData, abilities: userAbilities } = response.data
 
       if (token && userData) {

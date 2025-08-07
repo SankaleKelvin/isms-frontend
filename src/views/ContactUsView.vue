@@ -216,31 +216,32 @@ const inquiryTypes = [
 // FAQ items
 const faqItems = [
   {
-    question: 'How do I reset my password?',
+    question: 'How can I reset my password?',
     answer:
-      'You can reset your password by clicking the "Forgot Password" link on the login page. You will receive an email with instructions to create a new password.',
+      'To reset your password, click on the "Forgot Password" link on the login page. You’ll receive an email with steps to create a new one.',
   },
   {
-    question: 'How do I become a restaurant partner?',
+    question: 'How do I become a partner?',
     answer:
-      'Restaurants can apply to join our platform by filling out the partnership form on our website. Our team will review your application and contact you within 2-3 business days.',
+      'Interested in partnering with us? Please fill out the collaboration form on our website. Our team will review your request and get back to you within 2–3 business days.',
   },
   {
-    question: 'What areas do you currently serve?',
+    question: 'Which regions do you support?',
     answer:
-      'We currently operate in 20 major cities across the country. You can check if we deliver to your area by entering your zip code on our homepage.',
+      'We currently serve clients across multiple regions. You can verify coverage by entering your location on our homepage.',
   },
   {
-    question: 'How can I track my order?',
+    question: 'Where can I view the status of my request?',
     answer:
-      'Once your order is confirmed, you can track its status in real-time through our mobile app or website under "My Orders" section.',
+      'Once submitted, you can monitor your request’s progress in real-time via your dashboard under the "My Requests" section.',
   },
   {
-    question: 'What payment methods do you accept?',
+    question: 'What forms of payment are supported?',
     answer:
-      'We accept all major credit cards, debit cards, digital wallets, and in some locations, cash on delivery.',
+      'We accept major credit/debit cards, mobile money, digital wallets, and other secure payment options based on your region.',
   },
-]
+];
+
 
 // Form submission handler
 const submitForm = async () => {

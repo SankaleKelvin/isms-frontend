@@ -3,78 +3,67 @@
     <!-- Hero Section -->
     <section class="hero">
       <div class="hero-content">
-        <h1>Welcome to Restaurant Island</h1>
-        <p>Experience culinary excellence in every bite</p>
-        <button class="cta-button">Book a Table</button>
+        <h1>Secure Access for Critical Institutions</h1>
+        <p>
+          Trusted by government bodies, airports, embassies, and the judiciary for integrated access
+          control solutions.
+        </p>
+        <button class="cta-button">Request a Demo</button>
       </div>
     </section>
 
     <!-- Featured Section -->
     <section class="featured-section">
       <div class="container">
-        <h2 class="section-title">Our Specialties</h2>
+        <h2 class="section-title">Our Solutions</h2>
         <div class="featured-items">
           <div class="featured-item">
             <div class="featured-image">
-              <img src="../assets/images/love-icon.jpg" alt="Signature Dish">
+              <img src="../assets/images/biometric.jpg" alt="Biometric Access Control" />
             </div>
-            <h3>Signature Risotto</h3>
-            <p>Wild mushroom risotto with truffle oil and parmesan</p>
+            <h3>Biometric Access Control</h3>
+            <p>Fingerprint and facial authentication for secure entry.</p>
           </div>
           <div class="featured-item">
             <div class="featured-image">
-              <img src="../assets/images/fish.jpg" alt="Chef's Special">
+              <img src="../assets/images/rfid.jpg" alt="RFID Integration" />
             </div>
-            <h3>Chef's Special</h3>
-            <p>Pan-seared salmon with lemon butter sauce</p>
+            <h3>RFID Gate Integration</h3>
+            <p>Smart card and mobile tag access for staff and visitors.</p>
           </div>
           <div class="featured-item">
             <div class="featured-image">
-              <img src="../assets/images/love-icon.jpg" alt="Seasonal Offering">
+              <img src="../assets/images/cctv.jpg" alt="Surveillance" />
             </div>
-            <h3>Seasonal Offering</h3>
-            <p>Autumn vegetable tart with goat cheese</p>
+            <h3>Surveillance Integration</h3>
+            <p>Real-time camera feeds linked to access logs for enhanced security.</p>
           </div>
         </div>
       </div>
     </section>
 
-    <!-- About Section -->
-    <section class="about-section">
-      <div class="container">
-        <div class="about-content">
-          <div class="about-text">
-            <h2 class="section-title">Our Story</h2>
-            <p>Founded in 2010, Savoria brings together the finest ingredients and culinary expertise to create an unforgettable dining experience. Our chef, with over 20 years of experience, crafts each dish with passion and precision.</p>
-            <p>We believe in sustainable sourcing and supporting local farmers, ensuring that every ingredient that enters our kitchen meets our high standards of quality and freshness.</p>
-            <button class="secondary-button">Learn More</button>
-          </div>
-          <div class="about-image">
-            <img src="../assets/images/restaurant.jpg" alt="Restaurant Interior">
-          </div>
-        </div>
-      </div>
-    </section>
-
+    
     <!-- Testimonials Section -->
     <section class="testimonials-section">
       <div class="container">
-        <h2 class="section-title">What Our Guests Say</h2>
+        <h2 class="section-title">Client Feedback</h2>
         <div class="testimonials">
           <div class="testimonial">
             <div class="stars">★★★★★</div>
-            <p class="quote">"The best dining experience I've had in years. The food was exquisite and the service impeccable."</p>
-            <p class="author">- Maria S.</p>
+            <p class="quote">"The installation at our embassy was seamless. Real professionals."</p>
+            <p class="author">- Security Officer, Embassy of X</p>
           </div>
           <div class="testimonial">
             <div class="stars">★★★★★</div>
-            <p class="quote">"A hidden gem with atmosphere that matches the incredible flavors. Will definitely be returning!"</p>
-            <p class="author">- James T.</p>
+            <p class="quote">"We’ve had zero unauthorized access incidents since deployment."</p>
+            <p class="author">- IT Director, JKIA</p>
           </div>
           <div class="testimonial">
             <div class="stars">★★★★★</div>
-            <p class="quote">"From appetizers to dessert, every dish was prepared with attention to detail. Truly memorable."</p>
-            <p class="author">- Ana L.</p>
+            <p class="quote">
+              "They handled our Judiciary building integration with great care and speed."
+            </p>
+            <p class="author">- Facilities Manager, Judiciary of Kenya</p>
           </div>
         </div>
       </div>
@@ -85,22 +74,19 @@
       <div class="container">
         <div class="info-container">
           <div class="info-card">
-            <h3>Hours</h3>
-            <p>Monday - Thursday: 11am - 10pm</p>
-            <p>Friday - Saturday: 11am - 11pm</p>
-            <p>Sunday: 11am - 9pm</p>
-          </div>
-          <div class="info-card">
-            <h3>Location</h3>
-            <p>123 Culinary Avenue</p>
-            <p>Foodie District</p>
-            <p>Gastro City, GC 12345</p>
+            <h3>Head Office</h3>
+            <p>Westlands, Nairobi, Kenya</p>
+            <p>P.O. Box 12345-00100</p>
           </div>
           <div class="info-card">
             <h3>Contact</h3>
-            <p>Phone: (555) 123-4567</p>
-            <p>Email: info@savoria.com</p>
-            <p>Reservations recommended</p>
+            <p>Phone: +254 700 123456</p>
+            <p>Email: info@accessintegrators.co.ke</p>
+          </div>
+          <div class="info-card">
+            <h3>Working Hours</h3>
+            <p>Mon – Fri: 8:00am – 5:00pm</p>
+            <p>Saturday: 9:00am – 1:00pm</p>
           </div>
         </div>
       </div>
@@ -110,10 +96,10 @@
     <section class="newsletter-section">
       <div class="container">
         <div class="newsletter-content">
-          <h2>Stay Updated</h2>
-          <p>Subscribe to our newsletter for special offers and events</p>
+          <h2>Stay Informed</h2>
+          <p>Get updates on our latest installations, technologies, and solutions.</p>
           <form class="newsletter-form">
-            <input type="email" placeholder="Your email address" required>
+            <input type="email" placeholder="Your email address" required />
             <button type="submit">Subscribe</button>
           </form>
         </div>
@@ -123,8 +109,7 @@
 </template>
 
 <script setup>
-import { ref } from 'vue';
-
+import { ref } from 'vue'
 </script>
 
 <style scoped>
@@ -144,8 +129,9 @@ import { ref } from 'vue';
 
 /* Hero Section */
 .hero {
-  height: 80vh;
-  background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('/images/hero-bg.jpg');
+  height: 90vh;
+  background-image:
+    linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('/images/hero-bg.jpg');
   background-size: cover;
   background-position: center;
   display: flex;
@@ -245,7 +231,8 @@ import { ref } from 'vue';
   flex-wrap: wrap;
 }
 
-.about-text, .about-image {
+.about-text,
+.about-image {
   flex: 1;
   min-width: 300px;
 }
@@ -402,24 +389,24 @@ import { ref } from 'vue';
   .hero h1 {
     font-size: 3rem;
   }
-  
+
   .hero p {
     font-size: 1.2rem;
   }
-  
+
   .about-content {
     flex-direction: column-reverse;
   }
-  
+
   .newsletter-form {
     flex-direction: column;
   }
-  
+
   .newsletter-form input {
     border-radius: 4px;
     margin-bottom: 10px;
   }
-  
+
   .newsletter-form button {
     border-radius: 4px;
   }

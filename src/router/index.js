@@ -16,7 +16,7 @@ const router = createRouter({
       name: 'Home',
       component: HomeView,
       meta: {
-        requiresAuth: true,
+        requiresAuth: false,
       }
     },
     {
@@ -80,7 +80,7 @@ router.beforeEach((to, from, next) => {
     // Check if route requires specific ability
     if (to.meta.requiredAbility && !TokenService.hasAbility(to.meta.requiredAbility)) {
       // User doesn't have required ability, redirect to home or unauthorized page
-      return next({ name: 'homepage' })
+      return next({ name: 'Home' })
     }
   }
 
@@ -88,7 +88,7 @@ router.beforeEach((to, from, next) => {
   if (to.matched.some((record) => record.meta.guestOnly)) {
     if (TokenService.isAuthenticated()) {
       // User is already authenticated, redirect to home
-      return next({ name: 'homepage' })
+      return next({ name: 'Home' })
     }
   }
 

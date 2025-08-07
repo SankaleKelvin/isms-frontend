@@ -25,7 +25,6 @@
     const links = ref([
           {text:'Home', route:'/'},
           {text:'About Us', route:'/about-us'},
-          {text:'Services', route:'/services'},
           {text:'Contact Us', route:'/contact-us'},
           {text:'Login', route:'/login'},
         ]);

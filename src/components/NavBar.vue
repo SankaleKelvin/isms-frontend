@@ -36,7 +36,9 @@
     ></v-app-bar-nav-icon>
 
     <v-toolbar-title class="text-uppercase">
-      <span class="font-weight-light">DISSERTATION-TEST-3</span>
+      <router-link to="/">
+        <span class="font-weight-light">DISSERTATION-TEST-3</span>
+      </router-link>
     </v-toolbar-title>
 
     <v-spacer></v-spacer>

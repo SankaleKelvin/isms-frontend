@@ -11,10 +11,9 @@
               </div>
               <v-alert v-if="error" type="error" class="mb-4">{{ error }}</v-alert>
               <v-text-field
-                v-model="email"
+                v-model="username"
                 label="Email"
-                prepend-inner-icon="mdi-email"
-                :rules="emailRules"
+                prepend-inner-icon="mdi-email"                
                 required
                 outlined
                 dense
@@ -77,7 +76,7 @@ const router = useRouter()
 const { login, loading, error } = useAuth()
 
 // Form fields
-const email = ref('')
+const username = ref('')
 const password = ref('')
 const showPassword = ref(false)
 const rememberMe = ref(false)
@@ -102,14 +101,14 @@ async function handleLogin() {
     return
   }
   
-  if (!email.value || !password.value) {
+  if (!username.value || !password.value) {
     console.error('Email and password are required')
     return
   }
 
   try {
     await login({
-      email: email.value,
+      username: username.value,
       password: password.value
     })
    
