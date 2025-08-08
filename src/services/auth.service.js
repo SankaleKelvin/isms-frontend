@@ -1,69 +1,98 @@
 // src/services/auth.service.js
 
 import { ref, computed } from 'vue'
+import { jwtDecode } from 'jwt-decode'
 import TokenService from './token.service'
 import api from './api'
+import router from '../router/index'
 
 // 🔑 Singleton reactive state
 const user = ref(null)
-const abilities = ref({})
 const loading = ref(false)
 const error = ref(null)
 
-// ✅ Composable function
+// 🔐 Get user from JWT
+function decodeUserFromToken() {
+  const token = TokenService.getAccessToken()
+  if (!token) return null
+
+  try {
+    const decoded = jwtDecode(token)
+    return {
+      username: decoded.sub,
+      roles: decoded.roles || [],
+      exp: decoded.exp,
+    }
+  } catch (err) {
+    console.error('[auth.service] Failed to decode token:', err)
+    return null
+  }
+}
+
+// ✅ Composable auth function
 export function useAuth() {
+  const isAuthenticated = computed(() => {
+    return TokenService.isAuthenticated()
+  })
 
-  // Computed: is user authenticated?
-  const isAuthenticated = computed(() => !!user.value)
-
-  // Computed: is user admin?
-  const isAdmin = computed(() => user.value?.role?.name === 'admin')
-
-  // Computed: current user and abilities
   const currentUser = computed(() => user.value)
-  const userAbilities = computed(() => abilities.value)
 
-  // Ability checker
-  function can(ability) {
-    return abilities.value?.[ability] === true
+  const isAdmin = computed(() => {
+    return user.value?.roles?.includes('ROLE_ADMIN')
+  })
+
+  function can(role) {
+    return user.value?.roles?.includes(role)
   }
 
-  // Initialize from TokenService on app load
   function initialize() {
-    const savedUser = TokenService.getUser()
-    const savedAbilities = TokenService.getAbilities()
-    if (savedUser) {
-      user.value = savedUser
-      abilities.value = savedAbilities || {}
+    const decodedUser = decodeUserFromToken()
+    if (decodedUser) {
+      user.value = decodedUser
+      console.log('[AUTH] Initialized with user:', decodedUser)
+    } else {
+      console.warn('[AUTH] No valid token found during initialization.')
+      user.value = null
     }
   }
 
-  // Login
   async function login(credentials) {
     loading.value = true
     error.value = null
 
     try {
-      if (!credentials.username || !credentials.password) {
+      const { username, password } = credentials
+      if (!username || !password) {
         throw new Error('Username and password are required')
       }
 
-      const response = await api.post('api/auth/signin', credentials)
-      const { token, user: userData, abilities: userAbilities } = response.data
+      const response = await api.post(
+        'api/auth/signin',
+        { username, password },
+        {
+          headers: {
+            'Content-Type': 'application/x-www-form-urlencoded',
+          },
+        },
+      )
 
-      if (token && userData) {
-        user.value = userData
-        abilities.value = userAbilities || {}
+      const { access_token, refresh_token } = response.data
 
-        TokenService.setToken(token)
-        TokenService.setUser(userData)
-        TokenService.setAbilities(userAbilities)
+      if (access_token && refresh_token) {
+        TokenService.setAccessToken(access_token)
+        TokenService.setRefreshToken(refresh_token)
 
+        const decodedUser = decodeUserFromToken()
+        if (decodedUser) {
+          user.value = decodedUser
+          console.log('[LOGIN] User authenticated:', decodedUser)
+        }
+
+        router.push('/welcome')
         return response
       } else {
-        throw new Error('Invalid response format from server')
+        throw new Error('Missing tokens in server response')
       }
-
     } catch (err) {
       error.value = err.response?.data?.message || err.message || 'Login failed'
       throw err
@@ -72,12 +101,11 @@ export function useAuth() {
     }
   }
 
-  // Register
   async function register(userData) {
     loading.value = true
     error.value = null
     try {
-      return await api.post('register', userData)
+      return await api.post('api/auth/signup', userData)
     } catch (err) {
       error.value = err.response?.data?.message || 'Registration failed'
       throw err
@@ -86,20 +114,19 @@ export function useAuth() {
     }
   }
 
-  // Logout
   function logout() {
+    TokenService.removeTokens()
     user.value = null
-    abilities.value = {}
-    TokenService.removeToken()
+    router.push('/login')
   }
 
-  // Profile update
   async function updateProfile(profileData) {
     loading.value = true
     error.value = null
     try {
-      const response = await api.put('update-profile', profileData)
-      user.value = response.data.user || response.data
+      const response = await api.put('api/user/update-profile', profileData)
+      // If backend returns updated user, use it. Otherwise fallback to decoding.
+      user.value = response.data.user || decodeUserFromToken()
       return response
     } catch (err) {
       error.value = err.response?.data?.message || 'Profile update failed'
@@ -109,12 +136,10 @@ export function useAuth() {
     }
   }
 
-  // Return service API
   return {
     user,
     loading,
     error,
-    abilities: userAbilities,
     isAuthenticated,
     isAdmin,
     currentUser,
@@ -123,12 +148,11 @@ export function useAuth() {
     login,
     register,
     logout,
-    updateProfile
+    updateProfile,
   }
 }
 
-
-// ✅ Global service that always uses the singleton state
+// ✅ Global singleton-style service for app-wide use
 const globalAuthService = {
   initialize() {
     const { initialize } = useAuth()
@@ -146,13 +170,9 @@ const globalAuthService = {
     const { currentUser } = useAuth()
     return currentUser.value
   },
-  getAbilities() {
-    const { abilities } = useAuth()
-    return abilities.value
-  },
-  can(ability) {
+  can(role) {
     const { can } = useAuth()
-    return can(ability)
+    return can(role)
   },
   login(credentials) {
     const { login } = useAuth()
@@ -169,7 +189,7 @@ const globalAuthService = {
   updateProfile(profileData) {
     const { updateProfile } = useAuth()
     return updateProfile(profileData)
-  }
+  },
 }
 
 export default globalAuthService

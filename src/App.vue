@@ -1,9 +1,9 @@
 <template>
-  <v-app>
+  <v-app class="d-flex flex-column fill-height">
     <NavBar />
-    <v-content>
-      <Router-View />
-    </v-content>
+    <v-main class="flex-grow-1">
+      <RouterView />
+    </v-main>
     <Footer />
   </v-app>
 </template>
@@ -14,9 +14,8 @@ import Footer from './components/FooterBar.vue'
 </script>
 
 <style>
-.main-content{
-  padding-top: 20px; 
-  min-height: 90vh; 
-  flex-grow: 1;
+.html, body, #app{
+  height: 100%; 
+  margin: 0;
 }
 </style>

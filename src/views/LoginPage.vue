@@ -7,7 +7,7 @@
             <v-form @submit.prevent="handleLogin" ref="form">
               <div class="text-center mb-6">
                 <h1 class="text-h4 font-weight-bold teal--text text--darken-2">Welcome Back</h1>
-                <p class="text-subtitle-1 mt-2">Log in to your Restaurant Island account</p>
+                <p class="text-subtitle-1 mt-2">Log in to your ISMS account</p>
               </div>
               <v-alert v-if="error" type="error" class="mb-4">{{ error }}</v-alert>
               <v-text-field
@@ -69,10 +69,8 @@
 
 <script setup>
 import { ref } from 'vue'
-import { useRouter } from 'vue-router'
 import { useAuth } from '../services/auth.service'
 
-const router = useRouter()
 const { login, loading, error } = useAuth()
 
 // Form fields
@@ -110,10 +108,7 @@ async function handleLogin() {
     await login({
       username: username.value,
       password: password.value
-    })
-   
-    // Redirect after successful login
-    router.push('/welcome')
+    })   
   } catch (err) {
     // Error is already handled by the auth service
     console.error('Login failed', err)
