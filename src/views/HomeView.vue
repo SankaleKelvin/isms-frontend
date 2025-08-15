@@ -19,21 +19,21 @@
         <div class="featured-items">
           <div class="featured-item">
             <div class="featured-image">
-              <img src="../assets/images/biometric.jpg" alt="Biometric Access Control" />
+              <!--img src="../assets/images/biometric.jpg" alt="Biometric Access Control" /-->
             </div>
             <h3>Biometric Access Control</h3>
             <p>Fingerprint and facial authentication for secure entry.</p>
           </div>
           <div class="featured-item">
             <div class="featured-image">
-              <img src="../assets/images/rfid.jpg" alt="RFID Integration" />
+              <!--img src="../assets/images/rfid.jpg" alt="RFID Integration" /-->
             </div>
             <h3>RFID Gate Integration</h3>
             <p>Smart card and mobile tag access for staff and visitors.</p>
           </div>
           <div class="featured-item">
             <div class="featured-image">
-              <img src="../assets/images/cctv.jpg" alt="Surveillance" />
+              <!--img src="../assets/images/cctv.jpg" alt="Surveillance" /-->
             </div>
             <h3>Surveillance Integration</h3>
             <p>Real-time camera feeds linked to access logs for enhanced security.</p>

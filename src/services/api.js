@@ -3,7 +3,7 @@ import router from '../router/index';
 import TokenService from './token.service';
 
 const instance = axios.create({
-  baseURL: 'http://localhost:8085/',
+  baseURL: 'http://144.126.224.235/',
   headers: {
     'Content-Type': 'application/json',
   },
