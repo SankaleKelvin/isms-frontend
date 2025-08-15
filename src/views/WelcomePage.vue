@@ -100,7 +100,7 @@ import globalAuthService from '../services/auth.service'
 const router = useRouter()
 const { isAuthenticated, currentUser, can } = useAuth()
 
-const getImageUrl = (path) => `http://localhost:8000/storage/${path}`
+const getImageUrl = (path) => `http://localhost:80085/${path}`
 
 // 🔍 Add logging
 console.log('Component mounted: checking auth...')
@@ -108,7 +108,7 @@ console.log('Component mounted: checking auth...')
 onMounted(async () => {
   try {
     console.log('[INIT] Calling globalAuthService.initialize()')
-    await globalAuthService.initialize()
+    globalAuthService.initialize()
 
     console.log('[AUTH] isAuthenticated:', isAuthenticated.value)
     console.log('[AUTH] currentUser:', currentUser.value)
@@ -131,14 +131,14 @@ const userEmail = computed(() => {
 })
 
 const userRole = computed(() => {
-  const role = currentUser.value?.role?.name || currentUser.value?.roles?.[0] || 'Customer'
+  const role = currentUser.value?.role || currentUser.value?.roles || 'Customer'
   console.log('[USER] userRole:', role)
   return role
 })
 
 const userPhotoUrl = computed(() => {
-  if (currentUser.value?.user_photo) {
-    const url = `http://localhost:8000/storage/${currentUser.value.user_photo}`
+  if (currentUser.value?.userLogo) {
+    const url = `http://localhost:8085/${currentUser.value.userLogo}`
     console.log('[USER] userPhotoUrl:', url)
     return url
   } else {

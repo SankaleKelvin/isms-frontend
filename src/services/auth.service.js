@@ -31,9 +31,7 @@ function decodeUserFromToken() {
 
 // ✅ Composable auth function
 export function useAuth() {
-  const isAuthenticated = computed(() => {
-    return TokenService.isAuthenticated()
-  })
+  const isAuthenticated = computed(() => !!user.value)
 
   const currentUser = computed(() => user.value)
 
@@ -46,50 +44,46 @@ export function useAuth() {
   }
 
   function initialize() {
-    const decodedUser = decodeUserFromToken()
-    if (decodedUser) {
-      user.value = decodedUser
-      console.log('[AUTH] Initialized with user:', decodedUser)
+    const userInfo = TokenService.getUserData()
+      console.log('[AUTH] Initialized with user:', userInfo)
+    if (userInfo) {
+      user.value = userInfo
     } else {
       console.warn('[AUTH] No valid token found during initialization.')
       user.value = null
     }
   }
 
+  // auth.service.js
   async function login(credentials) {
     loading.value = true
     error.value = null
 
     try {
-      const { username, password } = credentials
-      if (!username || !password) {
-        throw new Error('Username and password are required')
-      }
+      const response = await api.post('api/auth/signin', credentials, {
+        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+      })
 
-      const response = await api.post(
-        'api/auth/signin',
-        { username, password },
-        {
-          headers: {
-            'Content-Type': 'application/x-www-form-urlencoded',
-          },
-        },
-      )
-
-      const { access_token, refresh_token } = response.data
+      const {
+        access_token,
+        refresh_token,
+        email,
+        username,
+        firstName,
+        lastName,
+        roles,
+        userImage,
+      } = response.data
 
       if (access_token && refresh_token) {
         TokenService.setAccessToken(access_token)
         TokenService.setRefreshToken(refresh_token)
 
-        const decodedUser = decodeUserFromToken()
-        if (decodedUser) {
-          user.value = decodedUser
-          console.log('[LOGIN] User authenticated:', decodedUser)
-        }
+        const userData = { email, username, firstName, lastName, roles, userImage }
+        TokenService.setUserData(userData)
 
-        router.push('/welcome')
-        return response
+        user.value = { ...userData, roles: Array.isArray(roles) ? roles : [roles] }
+        return user.value // ✅ return the user
       } else {
         throw new Error('Missing tokens in server response')
       }

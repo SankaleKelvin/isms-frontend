@@ -13,7 +13,7 @@
               <v-text-field
                 v-model="username"
                 label="Email"
-                prepend-inner-icon="mdi-email"                
+                prepend-inner-icon="mdi-email"
                 required
                 outlined
                 dense
@@ -70,7 +70,9 @@
 <script setup>
 import { ref } from 'vue'
 import { useAuth } from '../services/auth.service'
+import { useRouter } from 'vue-router'
 
+const router = useRouter()
 const { login, loading, error } = useAuth()
 
 // Form fields
@@ -82,35 +84,27 @@ const form = ref(null)
 
 // Validation rules
 const emailRules = [
-  v => !!v || 'Email is required',
-  v => /.+@.+\..+/.test(v) || 'Email must be valid'
+  (v) => !!v || 'Email is required',
+  (v) => /.+@.+\..+/.test(v) || 'Email must be valid',
 ]
 
-const passwordRules = [
-  v => !!v || 'Password is required'
-]
+const passwordRules = [(v) => !!v || 'Password is required']
 
 // Login handler with form validation
+
 async function handleLogin() {
-  // Validate form before submission
   const isValid = form.value?.validate()
-  
-  if (!isValid) {
-    return
-  }
-  
-  if (!username.value || !password.value) {
-    console.error('Email and password are required')
-    return
-  }
+  if (!isValid) return
 
   try {
-    await login({
+    const loggedInUser = await login({
       username: username.value,
-      password: password.value
-    })   
+      password: password.value,
+    })
+    if (loggedInUser) {
+      router.push('/welcome')
+    }
   } catch (err) {
-    // Error is already handled by the auth service
     console.error('Login failed', err)
   }
 }
